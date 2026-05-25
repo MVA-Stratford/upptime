@@ -1,0 +1,38 @@
+:root {
+  /* Core Layout: Clean neutrals to let your logo and black text pop */
+  --body-background-color: #f8f9fa; 
+  --body-text-color: #212529; 
+  --card-background-color: #ffffff; 
+
+  /* Navigation: Crisp white with a subtle border and your Brand Red active state */
+  --nav-background-color: #ffffff;
+  --nav-border-bottom-color: #dee2e6; 
+  --nav-current-border-bottom-color: #d32f2f; /* Brand Red */
+
+  /* Borders */
+  --card-border-color: #e9ecef;
+
+  /* Status Colors: Muted, professional system colors */
+  --up-border-left-color: #2e7d32; /* Deep, professional green */
+  --degraded-border-left-color: #ed6c02; /* Warning orange/amber */
+  --down-border-left-color: #c62828; /* Alert red */
+  --down-background-color: #ffebee; /* Very soft red tint for down states */
+
+  /* Tags */
+  --tag-color: #ffffff;
+  --tag-up-background-color: #2e7d32;
+  --tag-down-background-color: #c62828;
+  --tag-degraded-background-color: #ed6c02;
+  --change-background-color: #ed6c02;
+
+  /* Buttons: Swapped from the random blue to your Brand Red */
+  --error-button-border-color: #b71c1c;
+  --error-button-background-color: #d32f2f;
+  --error-button-color: #ffffff;
+  --submit-button-border-color: #b71c1c;
+  --submit-button-background-color: #d32f2f;
+  --submit-button-color: #ffffff;
+
+  --graph-opacity: 1;
+  --graph-filter: none;
+}
