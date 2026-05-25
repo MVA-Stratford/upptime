@@ -1,0 +1,72 @@
+name: UniFi Advanced Checks
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-unifi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch UniFi Site Stats
+        env:
+          UNIFI_API_KEY: ${{ secrets.UNIFI_EXTERNAL_APIKEY }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          SITE_ID: ${{secrets.UNIFI_SITEID}}
+          REPO: mva-stratford/upptime
+        run: |
+          RESPONSE=$(curl -s \
+            -H "X-API-KEY: $UNIFI_API_KEY" \
+            -H "Accept: application/json" \
+            https://api.ui.com/v1/sites)
+
+          SITE=$(echo $RESPONSE | jq '.data[] | select(.siteId == "$SITE_ID")')
+
+          WAN1_UPTIME=$(echo $SITE | jq '.statistics.wans.WAN.wanUptime')
+          WAN2_UPTIME=$(echo $SITE | jq '.statistics.wans.WAN2.wanUptime')
+          OFFLINE_DEVICES=$(echo $SITE | jq '.statistics.counts.offlineDevice')
+
+          # ---- Helper functions ----
+
+          open_incident() {
+            LABEL=$1
+            TITLE=$2
+            # Only open if no issue with this label already exists
+            EXISTING=$(gh issue list --repo $REPO --label "$LABEL" --state open --json number --jq '.[0].number')
+            if [ -z "$EXISTING" ]; then
+              gh issue create --repo $REPO \
+                --title "$TITLE" \
+                --label "$LABEL" \
+                --label "status" \
+                --body "Automated incident detected by UniFi checks workflow."
+            fi
+          }
+
+          close_incident() {
+            LABEL=$1
+            ISSUE=$(gh issue list --repo $REPO --label "$LABEL" --state open --json number --jq '.[0].number')
+            if [ -n "$ISSUE" ]; then
+              gh issue close $ISSUE --repo $REPO --comment "Resolved automatically — check passing again."
+            fi
+          }
+
+          # ---- WAN1 (Wightman) ----
+          if (( $(echo "$WAN1_UPTIME < 99" | bc -l) )); then
+            open_incident "wan1-down" "⚠️ Primary ISP (Wightman) degraded — uptime ${WAN1_UPTIME}%"
+          else
+            close_incident "wan1-down"
+          fi
+
+          # ---- WAN2 (Starlink) ----
+          if (( $(echo "$WAN2_UPTIME < 98" | bc -l) )); then
+            open_incident "wan2-down" "⚠️ Secondary ISP (Starlink) degraded — uptime ${WAN2_UPTIME}%"
+          else
+            close_incident "wan2-down"
+          fi
+
+          # ---- Offline devices ----
+          if [ "$OFFLINE_DEVICES" -gt "0" ]; then
+            open_incident "devices-offline" "⚠️ $OFFLINE_DEVICES UniFi device(s) offline"
+          else
+            close_incident "devices-offline"
+          fi
