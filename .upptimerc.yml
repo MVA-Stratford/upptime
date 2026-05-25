@@ -8,11 +8,6 @@ sites:
   - name: Website
     url: $SECRET_WEBSITE
 
-  - name: Public IP Ping
-    check: "tcp-ping"
-    url: $SECRET_IP
-    
-
 status-website:
   # Add your custom domain name, or remove the `cname` line if you don't have a domain
   # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
