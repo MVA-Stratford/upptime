@@ -1,0 +1,62 @@
+:root {
+  /* Base */
+  --body-background-color: #f4f7fb;
+  --body-text-color: #111827;
+
+  /* Cards / Surfaces */
+  --card-background-color: #ffffff;
+  --nav-background-color: rgba(255, 255, 255, 0.9);
+
+  /* Borders */
+  --nav-border-bottom-color: #e5e7eb;
+  --nav-current-border-bottom-color: #2563eb;
+  --card-border-color: #e5e7eb;
+
+  /* Status Colors */
+  --down-border-left-color: #ef4444;
+  --down-background-color: #fee2e2;
+
+  --degraded-border-left-color: #f59e0b;
+
+  --up-border-left-color: #22c55e;
+
+  /* Tags */
+  --tag-color: #ffffff;
+
+  --tag-up-background-color: #16a34a;
+  --tag-down-background-color: #dc2626;
+  --tag-degraded-background-color: #d97706;
+
+  /* Changes / Incidents */
+  --change-background-color: #f59e0b;
+
+  /* Buttons */
+  --error-button-border-color: #2563eb;
+  --error-button-background-color: #3b82f6;
+  --error-button-color: #ffffff;
+
+  --submit-button-border-color: #2563eb;
+  --submit-button-background-color: #3b82f6;
+  --submit-button-color: #ffffff;
+
+  /* Graphs */
+  --graph-opacity: 1;
+  --graph-filter: none;
+}
+
+/* Optional polish */
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+nav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+article,
+section {
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
