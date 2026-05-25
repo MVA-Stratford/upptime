@@ -13,7 +13,7 @@ jobs:
           UNIFI_API_KEY: ${{ secrets.UNIFI_EXTERNAL_APIKEY }}
           GH_TOKEN: ${{ secrets.GH_PAT }}
           SITE_ID: ${{secrets.UNIFI_SITEID}}
-          REPO: mva-stratford/upptime
+          REPO: mvastratford/upptime
         run: |
           RESPONSE=$(curl -s \
             -H "X-API-KEY: $UNIFI_API_KEY" \
