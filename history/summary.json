@@ -22,17 +22,17 @@
     "url": "$SECRET_WEBSITE",
     "icon": "https://icons.duckduckgo.com/ip3/null.ico",
     "slug": "website",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 1684,
-    "timeDay": 1684,
-    "timeWeek": 1684,
-    "timeMonth": 1684,
-    "timeYear": 1684,
+    "time": 1493,
+    "timeDay": 1493,
+    "timeWeek": 1493,
+    "timeMonth": 1493,
+    "timeYear": 1493,
     "dailyMinutesDown": {}
   }
 ]
